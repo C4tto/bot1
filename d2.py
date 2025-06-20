@@ -6,12 +6,14 @@ st.set_page_config(page_title="Chatbot con Groq", layout="centered")
 st.title("Chatbot con Groq")
 
 # api_key
-api_key = ""
+key = "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"
 
 # modelos
 modelos_disponibles = [
     "llama3-8b-8192",
     "llama3-70b-8192",
+    "mixtral-8x7b-32768",
+    "gemma-7b-it"
 ]
 
 modelo_seleccionado = st.selectbox("Elegí el modelo de Groq", modelos_disponibles)
@@ -22,7 +24,7 @@ if "chat_history" not in st.session_state:
 
 user_input = st.text_input("Escribí tu mensaje")
 
-if st.button("Enviar") and api_key and user_input:
+if st.button("Enviar") and key and user_input:
     st.session_state.chat_history.append({"role": "user", "content": user_input})
     print(f"[Usuario]: {user_input}")
 
@@ -30,7 +32,7 @@ if st.button("Enviar") and api_key and user_input:
     response = requests.post(
         "https://api.groq.com/openai/v1/chat/completions",
         headers={
-            "Authorization": f"Bearer {api_key}",
+            "Authorization": f"Bearer {key}",
             "Content-Type": "application/json"
         },
         json={
@@ -47,8 +49,8 @@ if st.button("Enviar") and api_key and user_input:
         st.session_state.chat_history.append({"role": "assistant", "content": reply})
         print(f"[Bot]: {reply}")
     else:
-        st.error("Error en la respuesta")
-        print(f"[Error ]: {response.status_code} - {response.text}")
+        st.error("Error en la respuesta. Ver consola para más detalles.")
+        print(f"[Error]: {response.status_code} - {response.text}")
 
 # Mostrar historial en pantalla
 for msg in st.session_state.chat_history:
