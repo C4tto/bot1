@@ -9,11 +9,9 @@ st.title("Chatbot con Groq")
 api_key = "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"
 
 # modelos
-modelos_disponibles = [
+modelos = [
     "llama3-8b-8192",
     "llama3-70b-8192",
-    "mixtral-8x7b-32768",
-    "gemma-7b-it"
 ]
 
 modelo_seleccionado = st.selectbox("Elegí el modelo de Groq", modelos_disponibles)
@@ -49,8 +47,8 @@ if st.button("Enviar") and api_key and user_input:
         st.session_state.chat_history.append({"role": "assistant", "content": reply})
         print(f"[Bot]: {reply}")
     else:
-        st.error("Error en la respuesta. ¿La API Key es válida?")
-        print(f"[Error ❌]: {response.status_code} - {response.text}")
+        st.error("Error en la respuesta")
+        print(f"[Error ]: {response.status_code} - {response.text}")
 
 # Mostrar historial en pantalla
 for msg in st.session_state.chat_history:
