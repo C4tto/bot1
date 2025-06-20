@@ -9,7 +9,7 @@ st.title("Chatbot con Groq")
 api_key = ""
 
 # modelos
-modelos = [
+modelos_disponibles = [
     "llama3-8b-8192",
     "llama3-70b-8192",
 ]
