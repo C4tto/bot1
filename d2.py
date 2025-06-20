@@ -5,7 +5,7 @@ import requests
 st.set_page_config(page_title="Chatbot con Groq", layout="centered")
 st.title("Chatbot con Groq")
 
-key = "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"
+api_key = "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"
 
 # modelos
 modelos_disponibles = [
